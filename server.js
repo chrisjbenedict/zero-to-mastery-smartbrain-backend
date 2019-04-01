@@ -26,11 +26,11 @@ app.get('/', (req, res) => {
 })
 
 app.post('/signin', (req, res) => {
-  if (req.body.email === database.users[0].email &&
-      req.body.password === database.users[0].password) {
-    res.json(database.users[0])
+  var a = JSON.parse(req.body);
+  if (a.username === database.users[0].email && a.password === database.secrets.hash) {
+    res.send('signed in');
   } else {
-    res.status(400).json('error logging in')
+    res.json('access denied');
   }
 })
 
