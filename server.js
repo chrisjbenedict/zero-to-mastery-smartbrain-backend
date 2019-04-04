@@ -12,10 +12,8 @@ const image = require('./controllers/image');
 const db = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : '',
-    password : '',
-    database : 'smart-brain'
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
@@ -25,7 +23,7 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
-app.get('/', (req, res) => { res.send(database.users) })
+app.get('/', (req, res) => { res.send('it is working') })
 
 app.post('/signin', (req, res) => {signin.handleSignin(req, res, db, bcrypt)})
 
